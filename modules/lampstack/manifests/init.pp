@@ -2,7 +2,6 @@ class lampstack {
 	package { "apache2": }
 	package { "libapache2-mod-php7.0": }
 	package { "php7.0": }
-	package { "mysql-client": }
 	package { "php-mysql": }
 	package { "phpmyadmin":}
 
@@ -25,9 +24,11 @@ exec { "userdir":
 file { "/etc/apache2/mods-available/php7.0.conf":
 	content =>template("lampstack/php7.0.conf"),
         notify => Service["apache2"],
+	require => Package["apache2"],
 }
 file { "/etc/apache2/apache2.conf":
 	content => template("lampstack/apache2.conf"),
         notify => Service["apache2"],
+	require => Package["apache2"],
 }
 }
