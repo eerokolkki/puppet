@@ -10,6 +10,7 @@ allowcdrom => true,
 }
 file { "/var/www/html/index.php":
 content => template("lampstack/index.php"),
+require => Package["apache2"],
 }
 service { "apache2":
 ensure => "running",
