@@ -12,10 +12,14 @@ file { "/var/www/html/index.php":
 content => template("lampstack/index.php"),
 require => Package["apache2"],
 }
+file { "/var/www/html/index.html":
+	ensure => "absent",
+	require => Package["apache2"],
+}
 service { "apache2":
-ensure => "running",
-enable => "true",
-provider => "systemd",
+	ensure => "running",
+	enable => "true",
+	provider => "systemd",
 }
 exec { "userdir":
         notify => Service["apache2"],
