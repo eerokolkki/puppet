@@ -1,6 +1,7 @@
 class ssh1 {
 package { ssh:
 ensure => "installed",
+allowcdrom => "true",
 }
 exec { "sudo ufw enable":
 path => "/bin/:/usr/bin/:/sbin/:/usr/sbin/",
