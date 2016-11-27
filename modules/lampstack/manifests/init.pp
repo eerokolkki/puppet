@@ -17,12 +17,12 @@ file { "/var/www/html/index.html":
 ensure => "absent",
 require => Package["apache2"],
 file { "/etc/apache2/sites-available/${title}.com.conf":
-		content => template("apache/vhost.conf.erb"),
-        }
+content => template("lampstack/vhost.conf.erb"),
+}
 
 file { "/etc/apache2/sites-enabled/${title}.com.conf":
-		ensure => "link",
-		target => "../sites-available/${title}.com.conf",
+ensure => "link",
+target => "../sites-available/${title}.com.conf",
 }
 service { "apache2":
 ensure => "running",
