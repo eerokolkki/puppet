@@ -2,8 +2,6 @@ class lampstack {
 package { "apache2": }
 package { "libapache2-mod-php7.0":
 require => Package["apache2"], }
-package { "libapache2-mod-perl2":
-require => Package["apache2"],}
 package { "php7.0": }
 package { "php-mysql": }
 package { "phpmyadmin":}
@@ -18,6 +16,13 @@ require => Package["apache2"],
 file { "/var/www/html/index.html":
 ensure => "absent",
 require => Package["apache2"],
+file { "/etc/apache2/sites-available/${title}.com.conf":
+		content => template("apache/vhost.conf.erb"),
+        }
+
+file { "/etc/apache2/sites-enabled/${title}.com.conf":
+		ensure => "link",
+		target => "../sites-available/${title}.com.conf",
 }
 service { "apache2":
 ensure => "running",
@@ -27,11 +32,6 @@ provider => "systemd",
 exec { "userdir":
 notify => Service["apache2"],
 command => "/usr/sbin/a2enmod userdir",
-require => Package["apache2"],
-}
-exec { "cgi":
-notify => Service["apache2"],
-command => "/usr/sbin/a2enmod cgi",
 require => Package["apache2"],
 }
 file { "/etc/apache2/mods-available/php7.0.conf":
