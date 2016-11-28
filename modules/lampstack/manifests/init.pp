@@ -30,8 +30,7 @@ file { "/etc/skel/public_html":
 		ensure => "directory",
 		require => Package["apache2"],
 }
-
-	file { "/etc/skel/public_html/index.php":
+file { "/etc/skel/public_html/index.php":
 		content => template("lampstack/public_html/index.php"),
 		require => Package["apache2"],
 }
