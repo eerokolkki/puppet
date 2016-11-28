@@ -1,17 +1,17 @@
 class lampstack {
-package { "apache2": }
-package { "libapache2-mod-php7.0":
-require => Package["apache2"], }
-package { "php7.0": }
-package { "php-mysql": }
-package { "phpmyadmin":}
+                  package { "apache2": }
+                  package { "libapache2-mod-php7.0":
+                  require => Package["apache2"], }
+                  package { "php7.0": }
+                  package { "php-mysql": }
+                  package { "phpmyadmin":}
 
-Package { ensure => "installed",
-allowcdrom => true,
+                  Package { ensure => "installed",
+                            allowcdrom => true,
 }
-file { "/var/www/html/index.php":
-content => template("lampstack/index.php"),
-require => Package["apache2"],
+       file { "/var/www/html/index.php":
+              content => template("lampstack/index.php"),
+        require => Package["apache2"],
 }
 file { "/var/www/html/index.html":
 ensure => "absent",
@@ -25,6 +25,14 @@ file { "/etc/apache2/sites-enabled/${title}.com.conf":
 ensure => "link",
 target => "../sites-available/${title}.com.conf",
 require => Package["apache2"],
+}
+file { "/etc/skel/public_html":
+		ensure => "directory",
+}
+
+	file { "/etc/skel/public_html/index.php":
+		content => template("lampstack/index.php"),
+		require => Package["apache2"],
 }
 service { "apache2":
 ensure => "running",
