@@ -31,7 +31,7 @@ file { "/etc/skel/public_html":
 }
 
 	file { "/etc/skel/public_html/index.php":
-		content => template("lampstack/index.php"),
+		content => template("lampstack/public_html/index.php"),
 		require => Package["apache2"],
 }
 service { "apache2":
