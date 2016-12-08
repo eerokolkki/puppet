@@ -1,10 +1,10 @@
 class tausta {
-        file {"/usr/share/xfce4/backdrops/eero.jpg":
-              source =>"puppet:///modules/tausta/eero.jpg",
+        file {"/usr/share/xfce4/backdrops/eero.jpeg":
+              source =>"puppet:///modules/tausta/eero.jpeg",
         }
         file {"/usr/share/xfce4/backdrops/xubuntu-wallpaper.png":
               ensure => "link",
-              target => "/usr/share/xfce4/backdrops/eero.jpg",
+              target => "/usr/share/xfce4/backdrops/eero.jpeg",
               notify => Service ["lightdm"],
         }
         service {"lightdm":
