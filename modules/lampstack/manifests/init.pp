@@ -7,7 +7,7 @@ class lampstack {
 	package { "phpmyadmin":}
 
 	Package { ensure => "installed",
-                            allowcdrom => true,
+                  allowcdrom => true,
 	}
 	file { "/var/www/html/index.php":
 		content => template("lampstack/index.php"),
