@@ -5,7 +5,6 @@ class tausta {
         file {"/usr/share/xfce4/backdrops/xubuntu-wallpaper.png":
               ensure => "link",
               target => "/usr/share/xfce4/backdrops/eero.jpeg",
-              notify => Service ["lightdm"],
         }
         service {"lightdm":
         ensure => "running",
