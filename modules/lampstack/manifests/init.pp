@@ -26,6 +26,10 @@ class lampstack {
 		target => "../sites-available/${title}.com.conf",
 		require => Package["apache2"],
 	}
+	file { "/etc/hosts":
+		content => template("lampstack/hosts"),
+		require => Package["apache2"],
+	}
 	file { "/etc/skel/public_html":
 		ensure => "directory",
 		require => Package["apache2"],
